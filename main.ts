@@ -1,13 +1,6 @@
 namespace SpriteKind {
     export const Key = SpriteKind.create()
 }
-scene.onHitWall(SpriteKind.Player, function (sprite, location) {
-    tiles.setWallAt(tiles.getTileLocation(13, 2), true)
-    tiles.setWallAt(tiles.getTileLocation(13, 3), true)
-    tiles.setWallAt(tiles.getTileLocation(13, 4), true)
-    tiles.setWallAt(tiles.getTileLocation(13, 5), true)
-    tiles.setWallAt(tiles.getTileLocation(13, 6), true)
-})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile`, function (sprite, location) {
     tiles.setWallAt(tiles.getTileLocation(13, 4), false)
     tiles.setWallAt(tiles.getTileLocation(13, 5), false)
@@ -33,6 +26,13 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         . . . . . . . . . . 3 3 . . . . 
         . . . . . . . . . . 3 . . . . . 
         `, mySprite, -100, 50)
+})
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleBlueCrystal, function (sprite, location) {
+    game.splash("Congrats you have finished the easy maze! Push A to return to the start to try again to find the hard maze!")
+    mySprite.setPosition(70, 70)
+})
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleRedCrystal, function (sprite, location) {
+    game.splash("Congrats you have finished the hard maze! Push A to go to the next maze!")
 })
 let myEnemy: Sprite = null
 let projectile: Sprite = null
@@ -61,21 +61,21 @@ scene.cameraFollowSprite(mySprite)
 game.onUpdateInterval(5000, function () {
     myEnemy = sprites.create(img`
         . . . . . . . . . . . . . . . . 
-        . . . 7 7 7 7 7 7 7 7 7 . . . . 
-        . . 7 7 . . . . . . . 7 7 7 . . 
-        . . 7 . . . . . . . . . . 7 7 . 
-        . 7 7 . . 7 7 . . 7 7 . . . 7 . 
-        7 7 . . . 7 7 . . 7 7 . . . 7 . 
-        7 . . . . . . . . . . . . . 7 . 
-        7 7 . . . 7 . . . . 7 7 . . 7 . 
-        . 7 . . . 7 7 7 7 7 7 . . . 7 . 
-        . . 7 . . . . . . . . . . 7 7 . 
-        . . 7 7 7 . . . 7 7 7 7 7 7 . . 
-        . . . . 7 7 7 7 . . . 7 7 . . . 
-        . . . . 7 7 . . . . . 7 7 . . . 
-        . . . . 7 7 . . . . . 7 7 . . . 
-        . . . . 7 7 . . . . . 7 7 . . . 
-        . . . 7 7 7 7 . . . 7 7 7 7 . . 
+        . . . 8 8 8 8 8 8 8 8 8 . . . . 
+        . . 8 8 . . . . . . . 8 8 8 . . 
+        . . 8 . . . . . . . . . . 8 8 . 
+        . 8 8 . . 8 8 . . 8 8 . . . 8 . 
+        8 8 . . . 8 8 . . 8 8 . . . 8 . 
+        8 . . . . . . . . . . . . . 8 . 
+        8 8 . . . 8 . . . . 8 8 . . 8 . 
+        . 8 . . . 8 8 8 8 8 8 . . . 8 . 
+        . . 8 . . . . . . . . . . 8 8 . 
+        . . 8 8 8 . . . 8 8 8 8 8 8 . . 
+        . . . . 8 8 8 8 . . . 8 8 . . . 
+        . . . . 8 8 . . . . . 8 8 . . . 
+        . . . . 8 8 . . . . . 8 8 . . . 
+        . . . . 8 8 . . . . . 8 8 . . . 
+        . . . 8 8 8 8 . . . 8 8 8 8 . . 
         `, SpriteKind.Enemy)
     myEnemy.follow(mySprite, 50)
 })
