@@ -33,6 +33,7 @@ scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleBlueCrystal, f
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.collectibleRedCrystal, function (sprite, location) {
     game.splash("Congrats you have finished the hard maze! Push A to go to the next maze!")
+    tiles.placeOnTile(mySprite, tiles.getTileLocation(44, 3))
 })
 let myEnemy: Sprite = null
 let projectile: Sprite = null
